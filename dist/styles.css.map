@@ -1,0 +1,1 @@
+{"version":3,"file":"styles.css","mappings":";;;AAEA;EACE,WAHkB","sources":["webpack://link-tracker-for-medium/./src/styles/styles.scss"],"sourcesContent":["$primary-color: #333;\r\n\r\nbody {\r\n  color: $primary-color;\r\n}\r\n"],"names":[],"sourceRoot":""}
