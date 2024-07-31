@@ -1,16 +1,20 @@
-import './styles/global.scss';
-
-console.log("Hello, Webpack!");
+import "./styles/global.scss";
+import LinkStore from "./store/LinkStore.js";
 
 // Skeleton for sending click events
-document.addEventListener('click', function(event) {
+document.addEventListener("click", function (event) {
   let target = event.target;
-  while (target && target.tagName !== 'A') {
+  while (target && target.tagName !== "A") {
     target = target.parentElement;
   }
   if (target) {
     let href = target.href;
-    console.log(href);
-    chrome.runtime.sendMessage({href: href});
+    const linkStore = new LinkStore();
+    const linkData = linkStore.getLinkDataForTitle(document?.title);
+    if (Array.isArray(linkData)) {
+      linkStore.saveDataToSessionStorage(document?.title, [...linkData, href]);
+    } else linkStore.saveDataToSessionStorage(document?.title, [href]);
+
+    chrome.runtime.sendMessage({ pageTitle: document?.title, href: href });
   }
 });
