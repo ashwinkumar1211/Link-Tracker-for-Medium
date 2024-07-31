@@ -2,21 +2,28 @@
   "manifest_version": 3,
   "name": "Link Tracker",
   "version": "1.0",
-  "permissions": ["activeTab", "storage"],
-  "content_scripts": [
-    {
-      "matches": ["*://*.medium.com/*"],
-      "js": ["content.js"]
-    }
-  ],
+  "description": "Link Tracker for Medium",
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "dist/index.html",
     "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png"      
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
     }
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/bundle.js"],
+      "css": ["dist/styles.css"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+  ]
 }
